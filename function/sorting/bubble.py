@@ -3,7 +3,7 @@ li  = [3,10,2,9,1,9,2,5,3]
 arr=array('i',[1,7,2,9,3,9,2,3,4,10])
 
 
-dict={
+dicti={
     2020:[1,7,2,8,9],
     2019:[2,4,1,7],
     2017:[6,3,2,9],
@@ -26,7 +26,7 @@ def printbub(li):
   for i in range(len(li)):
       print (li[i],end=" ")
   print()
-
+'''
 def printdict(li):
   j=0
   for i in range(0,len(li)):
@@ -35,7 +35,7 @@ def printdict(li):
         print({k:v})
         j=0
 
-
+'''
 
   
 
@@ -43,13 +43,18 @@ bubble(li)
 printbub(li)      
 bubble(arr)
 printbub(arr)  
-convert=list(dict.items()) 
+convert=list(dicti.items()) 
 bubble(convert)
+printdict=dict(convert)
+print(printdict)
+
 
 for i in range(len(convert)):
         final=bubble(convert[i][1])
 
-printdict(convert)
+printdict=dict(convert)
+print(printdict)
+
 
 
 

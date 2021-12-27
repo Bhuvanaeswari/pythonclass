@@ -1,14 +1,14 @@
-from array import array
 
 
 
-dict={
+
+dicti={
     2020:[1,7,2,8,9],
     2019:[2,4,1,7],
     2017:[6,3,2,9],
     2021:[9,5,1,2,3]
     }
-print("dictionary  : ",dict)
+print("dictionary  : ",dicti)
 
 
 def bubble(data):
@@ -21,13 +21,14 @@ def bubble(data):
        return data
 
 
-li=list(dict.items())                
+li=list(dicti.items())                
 result=bubble(li)
 
 for i in range(len(result)):
          final=bubble(result[i][1])
  
 print("sorted   ",li)   
+'''
 j=0
 for i in range(0,len(li)):
         k=li[i][j]
@@ -37,4 +38,6 @@ for i in range(0,len(li)):
 
 
 
-
+'''
+final=dict(li)
+print(final)

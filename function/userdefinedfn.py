@@ -95,18 +95,8 @@ def prime(n,i=2):
        prime(n,i)
 
 
-'''
- if  i<=n+1:
-       if i==2 or i==3 or i==5 or i==7 or i==11 or i%2!=0 and i%3!=0 and i%5!=0 and i%7!=0 and i%11!=0:
-           print (i)
-           i=i+1
-           prime(n,i)
-       else:
-            i+=1
-            prime(n,i)   
- else:
-     return           
-'''
+   
+
 limit=int(input("enter the prime limit"))
 prime(limit,2)
 

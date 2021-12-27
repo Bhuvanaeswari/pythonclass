@@ -9,22 +9,25 @@ for in range
 # demo for in
 students=["revanth","a123","madhu","b456","_23",89]
 print (students)
-name=input("\n tell us student name : ")
-'''
+name=input("\n tell us starting letter : ")
 for i in students :
-    print (i)
+   # print (i)
   #  print(type(i))
   #  print(students[i]) error because i is in string type
   #  print(students)
-    if name in students :
-        print ("i have found" , name)
+    if  i.startswith(name) :
+        print (i,"i have found" , name)
         break
 else :
     print("couldn't find" , name)
-'''
+
 # demo for in range
 
 for i in range(0,len(students)):
+        if students[i].startswith(name):
+         print (students[i])
+         break
+'''
     if name == students[i]:
         print (i+1,students[i],students)
   
@@ -50,3 +53,4 @@ step=int(input("enter no of steps to move : "))
 while itr<len(students) :
     print(itr+1,students[itr])    
     itr+=step
+'''
