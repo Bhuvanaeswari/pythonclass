@@ -1,3 +1,4 @@
+# raw content with self.__directory which is saved as corporated.__directory and values are stored in __directory{} and we removed init funtion
 
 from model  import corporate
 
