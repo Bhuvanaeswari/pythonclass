@@ -1,5 +1,5 @@
 class corporate:
-    def __init__(self,org,nature,open,plc,emp,sal,rate):
+    def __init__(self,org=" ",nature=" ",open=" ",plc=" ",emp=0,sal=0.0,rate=0.0):
         self.__org=org
         self.__nature=nature
         self.__openings=open

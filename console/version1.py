@@ -137,71 +137,64 @@ class corporatedirectory:
 dir1 = corporatedirectory()
 print(dir1)
 
+while True:
+   print ("\n1.add\n2.list\n3.edit\n4.delete\n5.read\n6.search\n7.sort")
+   choice = int(input("enter the choice by number :  "))
+   if choice == 1 :
+      # append or add fn
+        ob2=corporate("ibm","product","c,java","chennai,hyderbad",7000,4.9,3.9)
+        dir1 + ["IBM",ob2]
+        print(dir1)
+        ob3=corporate(
+             input("Tell us corporate name: "),
+             input("Tell us nature of industry : "),
+             input("Tell us tech where it openings : " ),
+             input("Tell us campus locations : "),
+             int(input("Tell us no of employees : ")),
+             float(input("Tell us basic salary of this company : ")),
+             float(input("Tell us ratings for this company : "))
+            )
+        k=input("Tell us short form of this company : ")   
+        dir1 +[k,ob3]
+        print(dir1)
 
-# append or add fn
-ob2=corporate("ibm","product","c,java","chennai,hyderbad",7000,4.9,3.9)
-dir1 + ["IBM",ob2]
-print(dir1)
-
-ob3=corporate(
-    input("Tell us corporate name: "),
-    input("Tell us nature of industry : "),
-    input("Tell us tech where it openings : " ),
-    input("Tell us campus locations : "),
-    int(input("Tell us no of employees : ")),
-    float(input("Tell us basic salary of this company : ")),
-    float(input("Tell us ratings for this company : "))
-)
-k=input("Tell us short form of this company : ")   
-dir1 +[k,ob3]
-print(dir1)
-
-ob4=dir1.getcorporate()
-k=input("Tell us short form of this company :")
-dir1 + [k,ob4]
-print(dir1)
-
-
-# read
-print (dir1 >> "inf")
-print(dir1 >> "infy")
-
-# deletion
-print(dir1 - "cts")
-ob5=corporate("infosys","application","python","bangalore",12000,1.5,3.5)
-
-print(dir1 - ob5)
-print(dir1)
-
-# update
-
-dir1 << ["infy",corporate()]
-dir1 << ["",corporate("tata consultancy services")]
-obj=corporate("cognizant","application","python,java","chennai,bangalore",23000,2.8,4.1)
-dir1 << ["",obj]
-
-
-
-# search
-dir1 * "tcs"
-dir1 * corporate("cognizant","application","python,java","chennai,bangalore",23000,2.8,4.1),
-dir1 * corporate("infosys")
-dir1 * corporate(rate=4.1)
-
-#        (or)
-dir1 * ["",corporate(open="java")]
-dir1 * ["",corporate(nature="application")]
-dir1 * ["",corporate(rate=4.1)]
-dir1 * ["cts",corporate()]
-
-
-
-
-
-
-
-# sorting
-dir1.sortfn()
-print(dir1)
-
+        ob4=dir1.getcorporate()
+        k=input("Tell us short form of this company :")
+        dir1 + [k,ob4]
+        print(dir1)
+   elif choice ==2 :
+          print(dir1)
+   elif choice ==3 :
+            # update
+            dir1 << ["infy",corporate()]
+            dir1 << ["",corporate("tata consultancy services")]
+            obj=corporate("cognizant","application","python,java","chennai,bangalore",23000,2.8,4.1)
+            dir1 << ["",obj]
+   elif choice == 4:
+         # deletion
+        print(dir1 - "cts")
+        ob5=corporate("infosys","application","python","bangalore",12000,1.5,3.5)
+        print(dir1 - ob5)
+        print(dir1)
+   elif choice ==5 :
+           # read
+           print (dir1 >> "inf")
+           print(dir1 >> "infy")
+   elif choice == 6:
+        # search
+        dir1 * "tcs"
+        dir1 * corporate("cognizant","application","python,java","chennai,bangalore",23000,2.8,4.1),
+        dir1 * corporate("infosys")
+        dir1 * corporate(rate=4.1)
+        #        (or)
+        dir1 * ["",corporate(open="java")]
+        dir1 * ["",corporate(nature="application")]
+        dir1 * ["",corporate(rate=4.1)]
+        dir1 * ["cts",corporate()]
+   elif choice == 7 :    
+        # sorting
+        dir1.sortfn()
+        print(dir1)
+   else :
+        break
 
