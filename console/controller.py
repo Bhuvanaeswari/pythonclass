@@ -1,3 +1,6 @@
+# raw content with self.__directory which is saved as corporated.__directory and values are stored in __directory{} and we removed init funtion
+# controller.py and version1.py are same
+
 
 from model  import corporate
 
