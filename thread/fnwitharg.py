@@ -34,6 +34,8 @@ limit=int(input("\n enter the prime limit"))
 p = Thread(target=prim,args=(limit,))
 p.start()
 
+# function returning values 
+
 def factorial(n,fact=1):
     if n>=1:
         fact=fact*n

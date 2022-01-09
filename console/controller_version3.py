@@ -11,7 +11,7 @@ class corporatedirectory:
     def __str__(self):
         info = "directory had following corporate \n"
         l=""
-        for k,v in self.__directory.items():
+        for k,v in corporatedirectory.__directory.items():
            l+= str(k)+" - "+str(v)
         return l   
             #info +=k +" - " +str(v)+"\n"
@@ -29,37 +29,40 @@ class corporatedirectory:
         return cob
 
     def __add__(self,other):
-        self.__directory[other[0]]=other[1]
+        corporatedirectory.__directory[other[0]]=other[1]
         print(other[1].getorg()," has added in the directory with key ",other[0])
-       # print(self.__directory)
+       # print(corporatedirectory.__directory)
 
     def __rshift__(self,other):
-           if other  in self.__directory.keys():
-               return (self.__directory[other])  
+           #read
+           if other  in corporatedirectory.__directory.keys():
+               return (corporatedirectory.__directory[other])  
            else:
                return "key mismatched"
 
     def __sub__(self,other):
+        #deletion
            if type(other) is str:
-               if other in self.__directory.keys():
-                   #del self.__directory[other]
-                  self.__directory.pop(other)
+               if other in corporatedirectory.__directory.keys():
+                   #del corporatedirectory.__directory[other]
+                  corporatedirectory.__directory.pop(other)
                   return "deletion done on key"+other
            elif type(other) is corporate :
-               for eachk,eachv in self.__directory.items():
+               for eachk,eachv in corporatedirectory.__directory.items():
                    if other.getorg() == eachv.getorg() and eachv.getratings() == other.getratings():
-                       self.__directory.pop(eachk)
+                       corporatedirectory.__directory.pop(eachk)
                        return "deletion done by values"+other.getorg()
 
     def __lshift__(self,other):
+        #update
         key=other[0]  
         values=other[1]
         pair=[]
-        if key !=""   and key in self.__directory.keys():
+        if key !=""   and key in corporatedirectory.__directory.keys():
              pair.append(key)
-             pair.append(self.__directory[key])
+             pair.append(corporatedirectory.__directory[key])
         elif values.getorg() !="":
-                for eachk,eachv in  self.__directory.items():
+                for eachk,eachv in  corporatedirectory.__directory.items():
                     if eachv.getorg() == values.getorg() :
                        pair.append(eachk)
                        pair.append(eachv)           
@@ -81,35 +84,35 @@ class corporatedirectory:
                     pair[1].setratings(float(input("tell us new ratings  of  "+ pair[1].getorg()+ " : ")))                 
                else :
                     print(user, "not match any of the corporate attributes ")
-               self.__directory[pair[0]]=pair[1]
+               corporatedirectory.__directory[pair[0]]=pair[1]
                print("has updated\n")
-               print(self.__directory[pair[0]])
+               print(corporatedirectory.__directory[pair[0]])
 
 
     def sortfn(self):
-          temp=list(self.__directory.items())
+          temp=list(corporatedirectory.__directory.items())
           temp.sort()
          #print(str(temp))
-          self.__directory=dict(temp)
-          #print(self.__directory)
+          corporatedirectory.__directory=dict(temp)
+          #print(corporatedirectory.__directory)
 
     def __mul__ (self,other):
-        
+        #search
         if type(other) is str:
-            if other in self.__directory.keys():
-                print (str(self.__directory[other]))
+            if other in corporatedirectory.__directory.keys():
+                print (str(corporatedirectory.__directory[other]))
         elif type(other) is corporate:
-            for eachk,eachv in self.__directory.items():
+            for eachk,eachv in corporatedirectory.__directory.items():
                 if eachv.getorg() == other.getorg() or eachv.getratings() == other.getratings()  or eachv.getnature == other.getnature() :
-                    print(str(self.__directory[eachk]))
+                    print(str(corporatedirectory.__directory[eachk]))
         elif type(other) is list :
             key=other[0]
             val=other[1]
-            if key in self.__directory.keys():
-                return str(self.__directory[key])
+            if key in corporatedirectory.__directory.keys():
+                return str(corporatedirectory.__directory[key])
             else:
                 temp=""
-                for k,v in self.__directory.items():
+                for k,v in corporatedirectory.__directory.items():
                     if val.getnature() !=" " and val.getopenings() == " " and val.getratings() == 0.0:
                         if val.getnature() == v.getnature():
                                 temp+=k+" - "+ str(v)
@@ -117,7 +120,7 @@ class corporatedirectory:
                                if val.getopenings() in v.getopenings():
                                    temp+=k+" - "+str(v)
                     elif val.getnature() == " " and val.getopenings() == " " and val.getratings() !=0.0:
-                                if val.getratings() >= v.getratings():          
+                                if v.getratings() >= val.getratings():          
                                     temp+=k+" - "+str(v)
                                     
                 #print(temp)                

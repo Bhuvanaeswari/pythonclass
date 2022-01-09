@@ -1,3 +1,5 @@
+# using raise (in except class) ie redirecting
+
 alpha = 0
 beta = 0
 def fn1(chance=1):

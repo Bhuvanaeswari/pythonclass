@@ -37,10 +37,8 @@ g1=mall.games("navin")
 
 
 s.start()
-
 g.start()
 s1.start()
-
 g1.start()
 
 

@@ -11,7 +11,9 @@ class access (Thread):
         hold.acquire()
         print("welcome " ,self.name ," to corporate buddy ")
         dir1 = corporatedirectory()
-        #print(dir1)
+        #
+        # 
+        # print(dir1)
         while True:
             print ("\n1.add\n2.list\n3.edit\n4.delete\n5.read\n6.search\n7.sort\n")
             choice = int(input("enter the choice by number :  "))
@@ -44,7 +46,7 @@ class access (Thread):
                 print (dir1 >> input("enter the org short form : "))
             elif choice == 6:
                # search
-               based = input("based on what you wish to update : key or org or open or nature or rate ")
+               based = input("based on what you wish to search : key or org or open or nature or rate ")
                if based == "key":
                     dir1 * input("enter the org short form ")
                     #dir1 * [input("enter the org short form  : "),corporate()]
@@ -56,14 +58,15 @@ class access (Thread):
                      dir1 * ["",corporate(nature=input("enter the nature of the company : "))]
                elif based == "rate"    :
                      dir1 * ["",corporate(rate=float(input("enter the ratings : " )))]
-                     dir1 * ["cts",corporate()]
-               elif choice == 7 :    
+                     
+            elif choice == 7 :    
                   # sorting
-                    print(dir1.sortfn())
-                    #print(dir1)
+                    dir1.sortfn()
+                    print(dir1)
             else :
                 break
         hold.release()
+
 
 hold = Lock()
 t1=access("bhuvana")

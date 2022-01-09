@@ -1,3 +1,5 @@
+# single level inheritance & multi level inheritance
+
 class  google:
     def __init__(self,name,email,con):
         print("init constructed")
@@ -82,4 +84,3 @@ ob2 < 'instagram'
 ob2.mydownload()
 ob2.myrating()
 print(ob2)
-

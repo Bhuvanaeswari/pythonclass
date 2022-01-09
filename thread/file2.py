@@ -1,3 +1,4 @@
+# using join()
 from threading import *
 import time
 

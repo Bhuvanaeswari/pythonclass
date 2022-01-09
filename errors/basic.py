@@ -1,3 +1,4 @@
+# one exception is handled either for alpha or for beta
 alpha = 0
 beta = 0
 try :
