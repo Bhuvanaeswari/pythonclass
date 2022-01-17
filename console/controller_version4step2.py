@@ -3,7 +3,9 @@ from model  import corporate
 from pickle import *
 
 class corporatedirectory:
+    # permanant memory
     __file="D:\\resume\\dictversion4.doc"
+    # temporary memory
     __directory={}
             
     def __str__(self):
@@ -28,12 +30,16 @@ class corporatedirectory:
         return cob
 
     def __add__(self,other):
+        # load from the file to temporary directory
         tempfile=open(corporatedirectory.__file,"rb")
         corporatedirectory.__directory=load(tempfile)
         tempfile.close()
 
-        corporatedirectory.__directory[other[0]]=other[1]
+        # after loaded directory values add a new value
 
+        corporatedirectory.__directory[other[0]]=other[1]
+        
+        # in order to add new data permanently dump the temporary directory to the file
         tempfile=open(corporatedirectory.__file,"wb")
         dump(corporatedirectory.__directory,tempfile)
         tempfile.close()
@@ -63,17 +69,23 @@ class corporatedirectory:
                if other in corporatedirectory.__directory.keys():
                    #del corporatedirectory.__directory[other]
                   corporatedirectory.__directory.pop(other)
+
+                  # permanant deletion ,in order to impact in permanant storage dump to the file
                   tempfile=open(corporatedirectory.__file,"wb")
                   dump(corporatedirectory.__directory,tempfile)
                   tempfile.close()
+                  
                   return "deletion done on key"+other
            elif type(other) is corporate :
                for eachk,eachv in corporatedirectory.__directory.items():
                    if other.getorg() == eachv.getorg() and eachv.getratings() == other.getratings():
                        corporatedirectory.__directory.pop(eachk)
+                  
+                       # permanant deletion ,in order to impact in permanant storage dump to the file
                        tempfile=open(corporatedirectory.__file,"wb")
                        dump(corporatedirectory.__directory,tempfile)
                        tempfile.close()
+                  
                        return "deletion done by values"+other.getorg()
 
     def __lshift__(self,other):
@@ -112,9 +124,12 @@ class corporatedirectory:
                else :
                     print(user, "not match any of the corporate attributes ")
                corporatedirectory.__directory[pair[0]]=pair[1]
+
+               # in order to have permanant update impact
                tempfile=open(corporatedirectory.__file,"wb")
                dump(corporatedirectory.__directory,tempfile)
                tempfile.close()
+               
                print("has updated\n")
                print(corporatedirectory.__directory[pair[0]])
 
@@ -128,6 +143,8 @@ class corporatedirectory:
           temp.sort()
          #print(str(temp))
           corporatedirectory.__directory=dict(temp)
+          
+          # permanant impact
           tempfile=open(corporatedirectory.__file,"wb")
           dump(corporatedirectory.__directory,tempfile)
           tempfile.close()
