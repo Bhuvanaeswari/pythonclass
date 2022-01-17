@@ -1,16 +1,13 @@
+import tempfile
 from model  import corporate
-
+from pickle import *
 
 class corporatedirectory:
-    __directory={
-            "cts" : corporate("cognizant","application","python,java","chennai,bangalore",23000,2.8,4.1),
-            "tcs" : corporate("tata consultancy services","product","java,javascript","chennai,bangalore",42000,2.1,4.3),
-            "infy": corporate("infosys","application","python","bangalore",12000,1.5,3.5),
+    __file="D:\\resume\\dictversion4.doc"
+    __directory={}
             
-    }
-           
-
     def __str__(self):
+        corporatedirectory.__directory=load(open(corporatedirectory.__file,"rb"))
         info = "directory had following corporate \n"
         l=""
         for k,v in corporatedirectory.__directory.items():
@@ -31,32 +28,60 @@ class corporatedirectory:
         return cob
 
     def __add__(self,other):
+        tempfile=open(corporatedirectory.__file,"rb")
+        corporatedirectory.__directory=load(tempfile)
+        tempfile.close()
+
         corporatedirectory.__directory[other[0]]=other[1]
+
+        tempfile=open(corporatedirectory.__file,"wb")
+        dump(corporatedirectory.__directory,tempfile)
+        tempfile.close()
+
         print(other[1].getorg()," has added in the directory with key ",other[0])
-       # print(corporatedirectory.__directory)
+
+        #print(corporatedirectory.__directory)
 
     def __rshift__(self,other):
            #read
+           tempfile=open(corporatedirectory.__file,"rb")
+           corporatedirectory.__directory=load(tempfile)
+           tempfile.close()
+           
            if other  in corporatedirectory.__directory.keys():
                return (corporatedirectory.__directory[other])  
            else:
                return "key mismatched"
 
     def __sub__(self,other):
-        #deletion
+           #deletion
+           tempfile=open(corporatedirectory.__file,"rb")
+           corporatedirectory.__directory=load(tempfile)
+           tempfile.close()
+           
            if type(other) is str:
                if other in corporatedirectory.__directory.keys():
                    #del corporatedirectory.__directory[other]
                   corporatedirectory.__directory.pop(other)
+                  tempfile=open(corporatedirectory.__file,"wb")
+                  dump(corporatedirectory.__directory,tempfile)
+                  tempfile.close()
                   return "deletion done on key"+other
            elif type(other) is corporate :
                for eachk,eachv in corporatedirectory.__directory.items():
                    if other.getorg() == eachv.getorg() and eachv.getratings() == other.getratings():
                        corporatedirectory.__directory.pop(eachk)
+                       tempfile=open(corporatedirectory.__file,"wb")
+                       dump(corporatedirectory.__directory,tempfile)
+                       tempfile.close()
                        return "deletion done by values"+other.getorg()
 
     def __lshift__(self,other):
         #update
+        tempfile=open(corporatedirectory.__file,"rb")
+        corporatedirectory.__directory=load(tempfile)
+        tempfile.close()
+        
         key=other[0]  
         values=other[1]
         pair=[]
@@ -87,19 +112,34 @@ class corporatedirectory:
                else :
                     print(user, "not match any of the corporate attributes ")
                corporatedirectory.__directory[pair[0]]=pair[1]
+               tempfile=open(corporatedirectory.__file,"wb")
+               dump(corporatedirectory.__directory,tempfile)
+               tempfile.close()
                print("has updated\n")
                print(corporatedirectory.__directory[pair[0]])
 
 
     def sortfn(self):
+          tempfile=open(corporatedirectory.__file,"rb")
+          corporatedirectory.__directory=load(tempfile)
+          tempfile.close()
+          
           temp=list(corporatedirectory.__directory.items())
           temp.sort()
          #print(str(temp))
           corporatedirectory.__directory=dict(temp)
+          tempfile=open(corporatedirectory.__file,"wb")
+          dump(corporatedirectory.__directory,tempfile)
+          tempfile.close()
+
           #print(corporatedirectory.__directory)
 
     def __mul__ (self,other):
         #search
+        tempfile=open(corporatedirectory.__file,"rb")
+        corporatedirectory.__directory=load(tempfile)
+        tempfile.close()
+        
         if type(other) is str:
             if other in corporatedirectory.__directory.keys():
                 print (str(corporatedirectory.__directory[other]))

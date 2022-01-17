@@ -1,14 +1,22 @@
 from model  import corporate
-
+from pickle import *
+# run version4.py file then only u can c the encrpted form written on particular file
 
 class corporatedirectory:
-    __directory={
+    __directory={}
+    def __init__(self):
+        self.__directory={
             "cts" : corporate("cognizant","application","python,java","chennai,bangalore",23000,2.8,4.1),
             "tcs" : corporate("tata consultancy services","product","java,javascript","chennai,bangalore",42000,2.1,4.3),
             "infy": corporate("infosys","application","python","bangalore",12000,1.5,3.5),
             
-    }
-           
+          }
+        file=open("D:\\resume\\dictversion4.doc","wb")
+        dump(self.__directory,file)
+        print("few corporate data are stored in the file")
+        
+
+        
 
     def __str__(self):
         info = "directory had following corporate \n"
