@@ -1,0 +1,16 @@
+file=open("D:\\resume\\bhuvana.xls","r")
+
+data1=file.read(17)
+print(data1)
+data=file.read()
+print(data)
+file.seek(5,0)
+p=file.tell()
+print(p)
+print(file.read(p))
+file.seek(10,0)
+p=file.tell()
+print(p)
+print(file.read(p))
+
+file.close()
