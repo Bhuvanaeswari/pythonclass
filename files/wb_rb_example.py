@@ -1,0 +1,18 @@
+from pickle import *
+tuplestorage=(3.4,5.6,7.8,9.0,2.1)
+file=open("D:\\resume\\but.xls","wb")
+dump(tuplestorage,file)
+print(tuplestorage)
+#    (or)
+encry=dumps(tuplestorage)
+file.write(encry)
+print(encry)
+
+file.close()
+file=open("D:\\resume\\but.xls","rb")
+tmp=load(file)
+print(tmp)
+#    (or)
+tmp=loads(encry)
+print(tmp)
+file.close()    
