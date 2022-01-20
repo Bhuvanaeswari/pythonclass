@@ -1,7 +1,7 @@
 
-from cgitb import text
+
 from tkinter import *
-from tkinter import font
+
 obj=Tk()
 obj.geometry('200x400')
 obj.title("LABEL IN PLACE LAYOUT")

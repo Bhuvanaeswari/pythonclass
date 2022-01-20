@@ -1,10 +1,4 @@
-from cProfile import label
-from cgitb import text
-from msilib.schema import Font
-from textwrap import fill
 from tkinter import *
-from tkinter import font
-from turtle import bgcolor
 obj = Tk()
 obj.geometry('400x200')
 obj.title("LABEL IN PACK LAYOUT")
