@@ -28,7 +28,7 @@ class exampleexecution:
     
     def __sub__(self,other):
         for i in range(len(self.__lisst)):
-            if other in self.__lisst[i]:
+            if other == self.__lisst[i]:
                 del self.__lisst[i]
                 print("Account no  ",other," has deleted")
                 return
@@ -41,7 +41,9 @@ class exampleexecution:
         index=0
         ob=atmmodule()
         for i in range(len(self.__lisst)):
-            if other in self.__lisst[i]:
+            if other == self.__lisst[i]:
+
+            
                 temp=self.__lisst[i]
                 print(temp)
                 index=i
