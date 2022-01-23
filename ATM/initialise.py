@@ -9,9 +9,9 @@ class atmmodule :
         self.__branch=brnch
    
    def __str__(self):
-         #return "Account holder "+self.__accname+" is having savings account in bank name "+self.__bankname+" at "+self.__branch+" branch "+" with account number  "+str(self.__accnumber)+ " & IFSCCODE  as " +self.__ifsccode
-         return "["+str(self.__accnumber)+","+"'"+self.__accname+"'"+","+"'"+self.__bankname+"',"+"'"+self.__ifsccode+"',"+"'"+self.__branch+"']"
-   
+        # return "Account holder "+self.__accname+" is having savings account in bank name "+self.__bankname+" at "+self.__branch+" branch "+" with account number  "+str(self.__accnumber)+ " & IFSCCODE  as " +self.__ifsccode
+         return str(self.__accnumber)+","+"'"+self.__accname+"'"+","+"'"+self.__bankname+"',"+"'"+self.__ifsccode+"',"+"'"+self.__branch
+         
    
    def setaccnumber(self,accno): self.__accnumber=accno
    def setaccname(self,accname):self.__accname=accname
