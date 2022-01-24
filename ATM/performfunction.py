@@ -15,7 +15,11 @@ class exampleexecution:
     def details(self) :
         t=[]
         ob=atmmodule()
-        ob.setaccnumber(int(input("Tell us Account Number : ")))
+        try:
+            ob.setaccnumber(int(input("Tell us Account Number : ")))
+        except ValueError as ve :
+            print(ve,"plz enter the 8 digit numeric numbers")    
+            ob.setaccnumber(int(input("Tell us Account Number : ")))
         t.append(ob.getaccnumber())
         ob.setaccname(input("Tell us Account Holder name : "))
         t.append(ob.getaccname())
@@ -42,6 +46,7 @@ class exampleexecution:
         return (exampleexecution.__lisst)
     
     def __sub__(self,other):
+        # deletion
         tfile=open(exampleexecution.__file,"rb")
         exampleexecution.__lisst=load(tfile)
         tfile.close()
@@ -64,6 +69,7 @@ class exampleexecution:
     
 
     def __mul__(self,other):
+        # update
         tfile=open(exampleexecution.__file,"rb")
         exampleexecution.__lisst=load(tfile)
         tfile.close()
@@ -96,9 +102,9 @@ class exampleexecution:
             elif inp == "brname"    :
                     ob.setbranch(input("tell us new branch : "))
                     temp[4]=ob.getbranch()
-        else:
-            print("not matched")        
-            return
+            else:
+                print("string not matched")        
+                return
         print("Directory holder with account number ",other," has updated")    
         exampleexecution.__lisst[index]=temp
         tfile=open(exampleexecution.__file,"wb")
@@ -118,6 +124,7 @@ class exampleexecution:
         tfile.close()
 
     def __rshift__ (self,other):
+        #search
          tfile=open(exampleexecution.__file,"rb")
          exampleexecution.__lisst=load(tfile)
          tfile.close()
@@ -131,3 +138,4 @@ class exampleexecution:
                      return
                  else :
                      print("no such data available")    
+   
