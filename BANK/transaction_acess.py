@@ -21,6 +21,7 @@ while True:
         inp=input("CHOOSE MODE OF WITHDRAWAL : ")
         if inp == "ATM":
             print(divmod (obj,bankmodule(bpin=int(input("Enter PIN Number : ")))))
+            
         elif inp == "CHEQUE":
             print(obj % bankmodule(accno=int(input("Enter the A ccount number : "))))
         else :

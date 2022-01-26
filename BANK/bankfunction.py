@@ -1,21 +1,20 @@
 
 from bankinitial import bankmodule
+from pickle import *
 
 class banktransaction:
+    __file="D:\\resume\\banktransaction.doc"
     __lst=[]
-
-    def __init__(self):
-        self.__lst=[[1234578,"BHUVANA","Karur Vysya Bank","KVBL00007","Car Street",2000.50,1234],
-                    [7823112,"KAJOL","Axis Bank","AXS00008","Rama Krishna",7899.90,5623],
-                    [9239449,"SHRUTHI","Icici Bank","ICI00003","Meyannur",8923.43,7888],
-                    [7233333,"VARUN","Axis Bank","AXS00007","Hasthampati",6000.90,1414],
-                    ]
-
-
+    
     def __str__(self):
+        tfile=open(banktransaction.__file,"rb")
+        banktransaction.__lst=load(tfile)
+        tfile.close()
+
+
         info ="ACCOUNT HOLDER DETAILS \n"
-        for i in range (len(self.__lst)):
-            info+=str(self.__lst[i])+"\n"
+        for i in range (len(banktransaction.__lst)):
+            info+=str(banktransaction.__lst[i])+"\n"
         return info
 
     def details(self):
@@ -38,27 +37,43 @@ class banktransaction:
         return t
 
     def __add__(self,other):
-        self.__lst.append(other)
+        tfile=open(banktransaction.__file,"rb")
+        banktransaction.__lst=load(tfile)
+        tfile.close()
+        banktransaction.__lst.append(other)
         print("NEW HOLDER ADDED")
-        return self.__lst
+        tfile=open(banktransaction.__file,"wb")
+        dump(banktransaction.__lst,tfile)
+        tfile.close()
+        return banktransaction.__lst
 
     def __sub__(self,other):
+        tfile=open(banktransaction.__file,"rb")
+        banktransaction.__lst=load(tfile)
+        tfile.close()
+
         if type(other) is bankmodule:
-            for i in range(len(self.__lst)):
-                if other.getaccnumber() in self.__lst[i]:
-                  del self.__lst[i]
+            for i in range(len(banktransaction.__lst)):
+                if other.getaccnumber() in banktransaction.__lst[i]:
+                  del banktransaction.__lst[i]
+                  tfile=open(banktransaction.__file,"wb")
+                  dump(banktransaction.__lst,tfile)
+                  tfile.close()
                   return "DELETION DONE USING ACCOUNT NUMBER"
             else :
                 print("Values not matched")          
                 return
 
     def __mul__(self,other):
+        tfile=open(banktransaction.__file,"rb")
+        banktransaction.__lst=load(tfile)
+        tfile.close()
         temp=[]
         ind=0
         ob=bankmodule()
-        for i in range(len(self.__lst)):
-            if other in self.__lst[i]:
-                temp=self.__lst[i]
+        for i in range(len(banktransaction.__lst)):
+            if other in banktransaction.__lst[i]:
+                temp=banktransaction.__lst[i]
                 ind=i
                 break
         else:
@@ -84,24 +99,34 @@ class banktransaction:
             else :
                 print("ATTRIBUTES DIDN'T MATCH")     
                 return
-        self.__lst[ind]=temp
+        banktransaction.__lst[ind]=temp
+        tfile=open(banktransaction.__file,"wb")
+        dump(banktransaction.__lst,tfile)
+        tfile.close()
+
         return "ACCOUNT NO WITH "+ str(ob.getaccnumber()) +" HAS UPDATED"
 
 
     def __rshift__(self,other):
+        tfile=open(banktransaction.__file,"rb")
+        banktransaction.__lst=load(tfile)
+        tfile.close()
         if type(other) is bankmodule:
-            for i in range(len(self.__lst)):
-                if other.getbankname() in self.__lst[i]:
-                    print(self.__lst[i])      
+            for i in range(len(banktransaction.__lst)):
+                if other.getbankname() in banktransaction.__lst[i]:
+                    print(banktransaction.__lst[i])      
             return " DETAILS LISTED"
 
 
     def __lshift__(self,other):
+        tfile=open(banktransaction.__file,"rb")
+        banktransaction.__lst=load(tfile)
+        tfile.close()
         temp=[]
         if type(other) is bankmodule:
-            for i in range(len(self.__lst)):
-                if other.getaccnumber() in self.__lst[i]:
-                    temp=self.__lst[i]
+            for i in range(len(banktransaction.__lst)):
+                if other.getaccnumber() in banktransaction.__lst[i]:
+                    temp=banktransaction.__lst[i]
                     if len(temp)!=0 :
                         info = "ACCOUNT DETAILS : \n"
                         info+="Account Number  : "+str(temp[0])+"\n"
@@ -119,21 +144,28 @@ class banktransaction:
                 print("INVALID ACCOUNT NUMBER")    
 
     def __and__(self,other):
+        tfile=open(banktransaction.__file,"rb")
+        banktransaction.__lst=load(tfile)
+        tfile.close()
+
         if type (other) is bankmodule:
             ob=bankmodule()
             temp=[]
             cb=0.0
             ind=0
-            for i in range(len(self.__lst)):
-                 if other.getpinnum() in self.__lst[i]:
+            for i in range(len(banktransaction.__lst)):
+                 if other.getpinnum() in banktransaction.__lst[i]:
                          amt = int(input("Enter the amount to be deposited : "))
-                         temp= self.__lst[i]
+                         temp= banktransaction.__lst[i]
                          cb=temp[5]
                          cb+=amt
                          temp[5]=cb
                          ind=i      
             if len(temp)!=0:
-                self.__lst[ind]=temp 
+                banktransaction.__lst[ind]=temp 
+                tfile=open(banktransaction.__file,"wb")
+                dump(banktransaction.__lst,tfile)
+                tfile.close()
                 return temp[1]+" current balance is " +str(temp[5])
             else:
                 print("INVALID PIN ")    
@@ -141,86 +173,184 @@ class banktransaction:
                    
 
     def __or__(self,other):
+        tfile=open(banktransaction.__file,"rb")
+        banktransaction.__lst=load(tfile)
+        tfile.close()
+
         if type (other) is bankmodule:
             ob=bankmodule()
             temp=[]
             cb=0.0
             ind=0
-            for i in range(len(self.__lst)):
-                 if other.getaccnumber() in self.__lst[i]:
+            for i in range(len(banktransaction.__lst)):
+                 if other.getaccnumber() in banktransaction.__lst[i]:
                          amt = int(input("Enter the amount to be deposited : "))
-                         temp= self.__lst[i]
+                         temp= banktransaction.__lst[i]
                          if temp[3] == other.getifsccode():
                              cb=temp[5]
                              cb+=amt
                              temp[5]=cb
                          ind=i      
             if len(temp)!=0:
-                self.__lst[ind]=temp 
+                banktransaction.__lst[ind]=temp 
+                tfile=open(banktransaction.__file,"wb")
+                dump(banktransaction.__lst,tfile)
+                tfile=close()
+
                 return temp[1]+" current balance is " +str(temp[5])
             else:
                 print("INVALID PIN ")    
                 return
 
     def __xor__(self,other):
+        tfile=open(banktransaction.__file,"rb")
+        banktransaction.__lst=load(tfile)
+        tfile.close()
+
         if type (other) is bankmodule:
             ob=bankmodule()
             temp=[]
             cb=0.0
             ind=0
-            for i in range(len(self.__lst)):
-                 if other.getaccnumber() in self.__lst[i]:
+            for i in range(len(banktransaction.__lst)):
+                 if other.getaccnumber() in banktransaction.__lst[i]:
                          amt = int(input("Enter the amount to be deposited : "))
-                         temp= self.__lst[i]
+                         temp= banktransaction.__lst[i]
                          if temp[1] == other.getaccholder():
                              cb=temp[5]
                              cb+=amt
                              temp[5]=cb
                          ind=i      
             if len(temp)!=0:
-                self.__lst[ind]=temp 
+                banktransaction.__lst[ind]=temp 
+                tfile=open(banktransaction.__file,"wb")
+                dump(banktransaction.__lst,tfile)
+                tfile.close()
                 return temp[1]+" current balance is " +str(temp[5])
             else:
                 print("INVALID PIN ")    
                 return
                    
     def __divmod__(self,other):
+        tfile=open(banktransaction.__file,"rb")
+        banktransaction.__lst=load(tfile)
+        tfile.close()
+        __2000s,__500s,__200s,__100s,__50s=5,10,50,50,10
+        t2000s,t500s,t100s,t200s,t50s=__2000s,__500s,__100s,__200s,__50s
         if type (other) is bankmodule:
             ob=bankmodule()
             temp=[]
             cb=0.0
             ind=0
-            for i in range(len(self.__lst)):
-                 if other.getpinnum() in self.__lst[i]:
-                         temp=self.__lst[i]
+            for i in range(len(banktransaction.__lst)):
+                 if other.getpinnum() in banktransaction.__lst[i]:
+                         temp=banktransaction.__lst[i]
                          amt = int(input("Enter the amount to be withdrawn : "))
                          if amt <= temp[5]:
                              cb=temp[5]
                              cb-=amt
                              temp[5]=cb
-                             ind=i      
+                             ind=i 
+                             cal=2000*5+500*10+200*50+100*50+50*10
+                             if amt <= cal :
+                                if amt >0 and amt//2000!=0 :
+                                    count=amt//2000
+                                    if count <= t2000s :
+                                        t2000s-=count
+                                        amt-=count*2000
+                                        print("2000 x ",count," = ",count*2000)
+                                    else :
+                                        print("2000 x ",t2000s," = ",t2000s*2000)    
+                                        amt-=t2000s*2000
+                                        t2000s=0
+                                    if amt >0 and t500s>0:
+                                        count=amt//500
+                                        if count<=t500s:
+                                            if count > 0:
+                                                t500s-=count
+                                                amt-=count*500
+                                                print("500 x ",count,"= ",count*500)
+                                            else :
+                                                pass    
+                                        else :
+                                            print("500 x ",t500s," = ",t500s*500)    
+                                            amt-=t500s*500
+                                            t500s=0
+                                    if amt >0 and t200s>0:
+                                        count=amt//200
+                                        if count<=t200s :
+                                            if count >0 :
+                                                 t200s-=count
+                                                 amt-=count*100
+                                                 print("200 x ",count," = ",count*200)           
+                                            else :
+                                                pass     
+                                        else:
+                                            print("200 x ",t200s," = ",t200s*100)    
+                                            amt-=t200s*200
+                                            t200s=0
+                                    if amt >0 and t100s>0:
+                                           count=amt//100
+                                           if count<=t100s:
+                                               if count > 0:
+                                                   t100s-=count
+                                                   amt-=count*100
+                                                   print("100 x ",count," = ",count*100)
+                                               else :
+                                                    pass   
+                                           else:
+                                                 print("100 x ",t100s," = ",t100s*100)    
+                                                 amt-=t100s*100
+                                                 t100s=0
+                                    if amt >0 and t50s>0:
+                                            count=amt//100
+                                            if count<=t50s:
+                                                if count > 0:
+                                                    t50s-=count
+                                                    amt-=count*50
+                                                    print("50 x ",count," = ",count*50)
+                                                else:
+                                                    pass    
+                                            else:
+                                                print("50 x ",t50s," = ",t50s*50)    
+                                                amt-=t50s*50
+                                                t50s=0
+                                    if amt >0 and amt <50:
+                                            print(amt,"x 1 = ",amt)           
+
+                             else:
+                                  print("amount can't be dispensed")
+                               
                          else :
                              print("INSUFFICIENT BALANCE")
                              return temp[1]+" current balance is " +str(temp[5])
 
             if len(temp)!=0:
-                self.__lst[ind]=temp 
+                banktransaction.__lst[ind]=temp
+                tfile=open(banktransaction.__file,"wb")
+                dump(banktransaction.__lst,tfile)
+                tfile.close()
                 return temp[1]+" current balance is " +str(temp[5])
             else:
                 print("INVALID PIN ")    
                 return
-                   
+
+
 
 
     def __mod__(self,other):
+        tfile=open(banktransaction.__file,"rb")
+        banktransaction.__lst=load(tfile)
+        tfile.close()
+
         if type (other) is bankmodule:
             ob=bankmodule()
             temp=[]
             cb=0.0
             ind=0
-            for i in range(len(self.__lst)):
-                 if other.getaccnumber() in self.__lst[i]:
-                         temp=self.__lst[i]
+            for i in range(len(banktransaction.__lst)):
+                 if other.getaccnumber() in banktransaction.__lst[i]:
+                         temp=banktransaction.__lst[i]
                          amt = int(input("Enter the amount to be withdrawn : "))
                          if amt <= temp[5]:
                              cb=temp[5]
@@ -232,7 +362,11 @@ class banktransaction:
                              return temp[1]+" current balance is " +str(temp[5])
 
             if len(temp)!=0:
-                self.__lst[ind]=temp 
+                banktransaction.__lst[ind]=temp 
+                tfile=open(banktransaction.__file,"wb")
+                dump(banktransaction.__lst,tfile)
+                tfile.close()
+
                 return temp[1]+" current balance is " +str(temp[5])
             else:
                 print("INVALID PIN ")    
@@ -240,44 +374,98 @@ class banktransaction:
                          
 
 
-
-
-
-
-
-
-
-
-
-
-            '''            
-obj = banktransaction()
-print(obj)
-while True:
-    print(" 1.ADD\n 2.DELETE\n 3.UPDATE\n 4.READ\n 5.LIST - Bank name\n 6.EXIT\n")
-    user = int(input("Enter ur choice: "))
-    if user == 1 :
-        # add
-        a=obj.details()
-        obj + a
-    elif user == 2 :
-        # delete
-        obj - bankmodule(accno=int(input("Enter the account no to be deleted  : ")))
-        print(obj)
-    elif user == 3 :
-        # update
-        c=int(input("Enter account no to be updated : "))
-        obj * c
-    elif user == 4 :
-        print(obj)
-    elif user == 5:
-        # list all the accout holders of particular bank
-        obj >> bankmodule(bnkname=input("Enter the bank name to be Listed : "))
-    elif user == 6:
-        break
-    else :
-      break
+                   
 '''
+    def __denom__(self,amt):
+         __2000s,__500s,__200s,__100s,__50s=5,10,50,50,10
+         t2000s,t500s,t100s,t200s,t50s=__2000s,__500s,__100s,__200s,__50s
+         cal=2000*5+500*10+200*50+100*50+50*10
+         if amt <= cal :
+           if amt >0 and amt//2000!=0 :
+               count=amt//2000
+               if count <= t2000s :
+                 t2000s-=count
+                 amt-=count*2000
+                 print("2000 x ",count," = ",count*2000)
+               else :
+                 print("2000 x ",t2000s," = ",t2000s*2000)    
+                 amt-=t2000s*2000
+                 t2000s=0
+           if amt >0 and t500s>0:
+                count=amt//500
+                if count<=t500s:
+                    if count>0:
+                       t500s-=count
+                       amt-=count*500
+                       print("500 x ",count,"= ",count*500)
+                    else:
+                        pass   
+                else :
+                    print("500 x ",t500s," = ",t500s*500)    
+                    amt-=t500s*500
+                    t500s=0
+           if amt >0 and t200s>0:
+                count=amt//200
+                if count<=t200s:
+                    if count > 0:
+                        t200s-=count
+                        amt-=count*100
+                        print("200 x ",count," = ",count*200)           
+                    else: 
+                        pass    
+                else:
+                    print("200 x ",t200s," = ",t200s*100)    
+                    amt-=t200s*200
+                    t200s=0
+           if amt >0 and t100s>0:
+                count=amt//100
+                if count<=t100s:
+                    if count>0:
+                        t100s-=count
+                        amt-=count*100
+                        print("100 x ",count," = ",count*100)
+                    else :
+                        pass
+
+                else:
+                    print("100 x ",t100s," = ",t100s*100)    
+                    amt-=t100s*100
+                    t100s=0
+           if amt >0 and t50s>0:
+                count=amt//100
+                if count<=t50s:
+                    if count >0 :
+                        t50s-=count
+                        amt-=count*50
+                        print("50 x ",count," = ",count*50)
+                    else :
+                        pass    
+                else:
+                    print("50 x ",t50s," = ",t50s*50)    
+                    amt-=t50s*50
+                    t50s=0
+           if amt >0 and amt <50:
+                print(amt,"x 1 = ",amt)           
+
+         else:
+             print("amount can't be dispensed")
+
+
+
+
+
+
+'''
+
+         
+
+       
+
+
+
+    
+
+
 
 
 
