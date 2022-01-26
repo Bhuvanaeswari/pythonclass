@@ -4,8 +4,8 @@ class sample(Tk):
         Tk.__init__(self)
         self.geometry('500x300')
         self.title("PLACE CUSTOMIZED ICON ")
-        self.ph=PhotoImage(file="D:\\PYTHON\\GUI\\OOAPPROCH\\flowericon.ico")
+        self.ph=PhotoImage(file="D:\\PYTHON\\GUI\\OOAPPROCH\\ficon.ico")
         self.iconphoto(FALSE,self.ph)
-
+        
 obj=sample()
 obj.mainloop()
