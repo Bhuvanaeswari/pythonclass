@@ -195,11 +195,11 @@ class banktransaction:
                 banktransaction.__lst[ind]=temp 
                 tfile=open(banktransaction.__file,"wb")
                 dump(banktransaction.__lst,tfile)
-                tfile=close()
+                tfile.close()
 
                 return temp[1]+" current balance is " +str(temp[5])
             else:
-                print("INVALID PIN ")    
+                print("INVALID ACCOUNT NUMBER")    
                 return
 
     def __xor__(self,other):
@@ -228,7 +228,7 @@ class banktransaction:
                 tfile.close()
                 return temp[1]+" current balance is " +str(temp[5])
             else:
-                print("INVALID PIN ")    
+                print("INVALID ACCOUNT NUMBER ")    
                 return
                    
     def __divmod__(self,other):
@@ -263,60 +263,60 @@ class banktransaction:
                                         print("2000 x ",t2000s," = ",t2000s*2000)    
                                         amt-=t2000s*2000
                                         t2000s=0
-                                    if amt >0 and t500s>0:
-                                        count=amt//500
-                                        if count<=t500s:
-                                            if count > 0:
-                                                t500s-=count
-                                                amt-=count*500
-                                                print("500 x ",count,"= ",count*500)
-                                            else :
-                                                pass    
+                                if amt >0 and t500s>0:
+                                    count=amt//500
+                                    if count<=t500s:
+                                        if count > 0:
+                                            t500s-=count
+                                            amt-=count*500
+                                            print("500 x ",count,"= ",count*500)
                                         else :
-                                            print("500 x ",t500s," = ",t500s*500)    
-                                            amt-=t500s*500
-                                            t500s=0
-                                    if amt >0 and t200s>0:
-                                        count=amt//200
-                                        if count<=t200s :
-                                            if count >0 :
-                                                 t200s-=count
-                                                 amt-=count*100
-                                                 print("200 x ",count," = ",count*200)           
-                                            else :
-                                                pass     
+                                                pass    
+                                    else :
+                                        print("500 x ",t500s," = ",t500s*500)    
+                                        amt-=t500s*500
+                                        t500s=0
+                                if amt >0 and t200s>0:
+                                    count=amt//200
+                                    if count<=t200s :
+                                        if count >0 :
+                                            t200s-=count
+                                            amt-=count*100
+                                            print("200 x ",count," = ",count*200)           
+                                        else :
+                                            pass     
+                                    else:
+                                        print("200 x ",t200s," = ",t200s*100)    
+                                        amt-=t200s*200
+                                        t200s=0
+                                if amt >0 and t100s>0:
+                                    count=amt//100
+                                    if count<=t100s:
+                                        if count > 0:
+                                            t100s-=count
+                                            amt-=count*100
+                                            print("100 x ",count," = ",count*100)
+                                        else :
+                                            pass   
+                                    else:
+                                        print("100 x ",t100s," = ",t100s*100)    
+                                        amt-=t100s*100
+                                        t100s=0
+                                if amt >0 and t50s>0:
+                                    count=amt//100
+                                    if count<=t50s:
+                                        if count > 0:
+                                            t50s-=count
+                                            amt-=count*50
+                                            print("50 x ",count," = ",count*50)
                                         else:
-                                            print("200 x ",t200s," = ",t200s*100)    
-                                            amt-=t200s*200
-                                            t200s=0
-                                    if amt >0 and t100s>0:
-                                           count=amt//100
-                                           if count<=t100s:
-                                               if count > 0:
-                                                   t100s-=count
-                                                   amt-=count*100
-                                                   print("100 x ",count," = ",count*100)
-                                               else :
-                                                    pass   
-                                           else:
-                                                 print("100 x ",t100s," = ",t100s*100)    
-                                                 amt-=t100s*100
-                                                 t100s=0
-                                    if amt >0 and t50s>0:
-                                            count=amt//100
-                                            if count<=t50s:
-                                                if count > 0:
-                                                    t50s-=count
-                                                    amt-=count*50
-                                                    print("50 x ",count," = ",count*50)
-                                                else:
-                                                    pass    
-                                            else:
-                                                print("50 x ",t50s," = ",t50s*50)    
-                                                amt-=t50s*50
-                                                t50s=0
-                                    if amt >0 and amt <50:
-                                            print(amt,"x 1 = ",amt)           
+                                            pass    
+                                    else:
+                                        print("50 x ",t50s," = ",t50s*50)    
+                                        amt-=t50s*50
+                                        t50s=0
+                                if amt >0 and amt <50:
+                                        print(amt,"x 1 = ",amt)           
 
                              else:
                                   print("amount can't be dispensed")
