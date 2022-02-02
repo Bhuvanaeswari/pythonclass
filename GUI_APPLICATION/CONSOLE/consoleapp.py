@@ -89,7 +89,7 @@ class consolegui(Tk):
         self.en3.delete(0,END)
         self.en4.delete(0,END)
         self.en5.delete(0,END)
-
+       
 
 
 
