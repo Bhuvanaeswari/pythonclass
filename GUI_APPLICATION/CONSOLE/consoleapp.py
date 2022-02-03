@@ -19,7 +19,8 @@ class consolegui(Tk):
         fontstyform=font=("callibre",10,BOLD)
         self.resizable(False,True)
         
-        self.lb=Label(self,text="WELCOME!  CORPORATE DIRECTORY",font=fontsty,fg='grey',bg='cyan').place(x=170,y=15)
+        
+        self.lb=Label(self,text="HELLO !  CORPORATE DIRECTORY",font=fontsty,fg='grey',bg='cyan').place(x=170,y=15)
         
         self.lb1=Label(self,text="CORPORATE NAME  ",font=fontsty2,fg='grey',bg='cyan').place(x=50,y=80)
         self.lb2=Label(self,text="CORPORATE NATURE  ",font=fontsty2,fg='grey',bg='cyan').place(x=50,y=130)
@@ -39,9 +40,12 @@ class consolegui(Tk):
         self.cb1=BooleanVar()
         self.cb2=BooleanVar()
         self.cb3=BooleanVar()
+        
         self.cb=Checkbutton(self,variable=self.cb1,text="JAVA",foreground='grey',background='cyan',font=fontstyform).place(x=350,y=180)
         self.cb=Checkbutton(self,variable=self.cb2,text="PYTHON",foreground='grey',background='cyan',font=fontstyform).place(x=440,y=180)
-        self.cb=Checkbutton(self,variable=self.cb3,text="DOT NET",foreground='grey',background='cyan',font=fontstyform).place(x=550,y=180)
+        self.cb=Checkbutton(self,variable=self.cb3,text="DOT NET",foreground='grey',background='cyan',font=fontstyform,image=PhotoImage(file="D:\PYTHON\GUI_APPLICATION\CONSOLE\dotnetnew.png"),compound='left').place(x=550,y=175)
+        
+
         self.en2=Entry(self,width=20,fg='grey',bg='cyan',font=fontsty3)
         self.en2.place(x=350,y=230)
         self.en3=Entry(self,width=18,fg='grey',bg='cyan',font=fontsty3)
@@ -50,6 +54,9 @@ class consolegui(Tk):
         self.en4.place(x=350,y=330)
         self.en5=Entry(self,width=10,fg='grey',bg='cyan',font=fontsty3)
         self.en5.place(x=350,y=380)
+
+            
+
 
 
     def submit(self):
