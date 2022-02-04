@@ -1,17 +1,19 @@
 from tkinter import *
 
-from pymysql import Connect
+from pymysql import *
 class lstdirectory(Tk):
     def __init__(self):
         Tk.__init__(self)
-        self.title("BANK DIRECTORY LIST")
+        self.title("BANK DIRECTORY")
         con =Connect(host="localhost",user="root",password="",database="directory")
         
-        qry="select * from direct"
+       
+        qry="select * from direct "
         cur=con.cursor()
         
         cur.execute(qry)
         all=cur.fetchall()
+        print(all)
 
         self.en1=Entry(self,width=40)
         self.en1.configure(justify=CENTER,bg="light green",fg='dark green')
@@ -52,7 +54,7 @@ class lstdirectory(Tk):
                 self.data.grid(row=line,column=c)
             self.but=Button(self,text="EDIT",fg="white",bg="red")    
             self.but.grid(row=line,column=5)
-            line=+1
+            line+=1
         con.close()
 
 obj=lstdirectory()
