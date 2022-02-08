@@ -1,16 +1,18 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter.font import BOLD
+from tkinter.simpledialog import askstring
 
 from tkinter.ttk import Combobox
 from turtle import bgcolor, width
 
 from pymysql import Connect
 
-class consolegui(Tk):
+class editgui(Tk):
     def __init__(self):
         Tk.__init__(self)
-        self.title("CORPORATE DIRECTORY")
+        
+        self.title("REVISED DIRECTORY")
         self.geometry('700x500')
         self.configure(background='cyan')
         fontsty=font=("callibre",14,BOLD)
@@ -20,7 +22,7 @@ class consolegui(Tk):
         self.resizable(False,True)
         
         
-        self.lb=Label(self,text="HELLO !  CORPORATE DIRECTORY",font=fontsty,fg='grey',bg='cyan').place(x=170,y=10)
+        self.lb=Label(self,text="   CORPORATE DIRECTORY",font=fontsty,fg='grey',bg='cyan').place(x=170,y=10)
 
         self.lb=Label(self,text="CORPORTE SHORTFORM  ",font=fontsty2,fg='grey',bg='cyan').place(x=50,y=50)
         self.lb1=Label(self,text="CORPORATE NAME  ",font=fontsty2,fg='grey',bg='cyan').place(x=50,y=90)
@@ -31,8 +33,9 @@ class consolegui(Tk):
         self.lb6=Label(self,text="CORPORATE MIN. SALARY  ",font=fontsty2,fg='grey',bg='cyan').place(x=50,y=330)
         self.lb7=Label(self,text="CORPORATE RATINGS  ",font=fontsty2,fg='grey',bg='cyan').place(x=50,y=380)
 
-        self.but=Button(self,text="APPROVE",font=fontsty2,bg='grey',fg='cyan',command=self.submit).place(x=350,y=450)
-        self.but2=Button(self,text="CANCEL",font=fontsty2,fg='cyan',bg='grey',command=self.reset).place(x=530,y=450) 
+        self.but=Button(self,text=" FIND ",font=fontsty2,bg='grey',fg='cyan',width=10,command=self.finding).place(x=150,y=450)
+        self.but=Button(self,text="UPDATE",font=fontsty2,bg='grey',fg='cyan',width=10,command=self.updating).place(x=300,y=450)
+        self.but2=Button(self,text="CANCEL",font=fontsty2,fg='cyan',bg='grey',width=10,command=self.reset).place(x=450,y=450) 
          
         self.en=Entry(self,width=20,fg='grey',bg='cyan',font=fontsty3) 
         self.en.place(x=350,y=50)
@@ -62,33 +65,33 @@ class consolegui(Tk):
 
 
 
-    def submit(self):
-        messagebox.showinfo("Approve","Corporate yet to be added")
+    def finding(self):
+        self.sf=StringVar()
         con=Connect(host="localhost",user="root",password="",database="consoleversion")
-
-        sf=str(self.en.get())
-        cn=str(self.en1.get())
-        cnat=str(self.cmb.get())
-        tmp=""
-        if self.cb1.get()==True:
-            tmp+="JAVA ,"
-        if self.cb2.get() == True:
-            tmp+="PYTHON ,"    
-        if self.cb3.get() == True:
-            tmp+="DOTNET "    
-        cp=str(self.en2.get())
-        ce=int(str(self.en3.get()))
-        cms=float(str(self.en4.get()))
-        cr=float(str(self.en5.get()))
-        qry=""" insert into corp(shortform,org,nature,opennings,place,employees,BasicSalary,ratings) values('%s','%s','%s','%s','%s','%d','%f','%f')""" %(sf,cn,cnat,tmp,cp,ce,cms,cr)
+        self.sf=askstring('NAME','ENTER THE SHORTFORM : ')
+        temp=self.sf
+        print(temp)
+        messagebox.showinfo("FETCH",str(self.sf))
+        qry="select * from corp where shortform like '%"+temp+"'"
         cur=con.cursor()
-        ack=cur.execute(qry)
-        con.autocommit(True)
-        if ack !=0 :
-            messagebox.showinfo("Alert!","Corporate has inserted")
-        else:
-            messagebox.showinfo("Alert!","Corporate hasn't inserted")    
+        cur.execute(qry)
+        
+        rowdata=cur.fetchone()
+        print(rowdata)
+        print(rowdata[0]," ",rowdata[1]," ",rowdata[2]," ",rowdata[3]," ",rowdata[4]," ",rowdata[5]," ",rowdata[6]," ",rowdata[7]," ")
+        self.en.insert(0,rowdata[0])
+        self.en1.insert(0,rowdata[1])
+        self.cmb.insert(0,rowdata[2])
+        
+        
+        self.en2.insert(0,rowdata[4])
+        self.en3.insert(0,rowdata[5])
+        self.en4.insert(0,rowdata[6])
+        self.en5.insert(0,rowdata[7])
         con.close()
+        
+
+
 
     def reset(self):
         messagebox.showinfo("Cancel","All feilds yet to be cleared")     
@@ -102,12 +105,30 @@ class consolegui(Tk):
         self.en3.delete(0,END)
         self.en4.delete(0,END)
         self.en5.delete(0,END)
-       
+    
+    def updating(self):
+       temp=StringVar()
+       con=Connect(host="localhost",user="root",password="",database="consoleversion")
+       con.autocommit(True)
+       cn=str(self.en1.get())
+       cnat=str(self.cmb.get())
+       cp=str(self.en2.get())
+       #cjava=str(self.cb1.get())
+       #cpython=str(self.cb2.get())
+       #cdotnet=str(self.cb3.get())
+       ce=int(str(self.en3.get()))
+       cms=float(str(self.en4.get()))
+       cr=float(str(self.en5.get()))
+       temp=str(self.en.get())
+       print(self.sf,temp)
+       qry=""" Update corp SET org = '%s',nature='%s',place='%s',employees='%d',BasicSalary='%f',ratings='%f' WHERE shortform ='INFY' """ %(cn,cnat,cp,ce,cms,cr)
+       cur=con.cursor()
+       ack=cur.execute(qry)
+       if ack!=0 :
+           messagebox.showinfo("INFO","CORPORATE HAS UPDATED")
+       else:
+           messagebox.showinfo("INFO","UPDATED NOT DONE")   
+       con.close()
 
-
-
-
-obj=consolegui()
+obj=editgui()
 obj.mainloop()        
-
-
