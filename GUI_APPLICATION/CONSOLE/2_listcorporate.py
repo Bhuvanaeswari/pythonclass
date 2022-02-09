@@ -18,7 +18,7 @@ class lstcorporate(Tk):
         cur=con.cursor()
         cur.execute(qry)
         all=cur.fetchall()
-        fontsty=font=(BOLD)
+        
 
         self.en=Entry(self,width=26)
         self.en.insert(END,"ORG SHORTFORM")
@@ -66,7 +66,7 @@ class lstcorporate(Tk):
         self.en1.grid(row=0,column=8)
 
         line=1
-        temp=""
+        
         
         for r in all:
             for c in range(0,8):

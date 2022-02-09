@@ -92,7 +92,6 @@ class editgui(Tk):
         
 
 
-
     def reset(self):
         messagebox.showinfo("Cancel","All feilds yet to be cleared")     
         self.en.delete(0,END)
@@ -108,6 +107,7 @@ class editgui(Tk):
     
     def updating(self):
        temp=StringVar()
+       self.sf=StringVar()
        con=Connect(host="localhost",user="root",password="",database="consoleversion")
        con.autocommit(True)
        cn=str(self.en1.get())
@@ -121,7 +121,7 @@ class editgui(Tk):
        cr=float(str(self.en5.get()))
        temp=str(self.en.get())
        print(self.sf,temp)
-       qry=""" Update corp SET org = '%s',nature='%s',place='%s',employees='%d',BasicSalary='%f',ratings='%f' WHERE shortform ='INFY' """ %(cn,cnat,cp,ce,cms,cr)
+       qry=""" Update corp SET org = '%s',nature='%s',place='%s',employees='%d',BasicSalary='%f',ratings='%f' where shortform LIKE '%"+temp+"' """ %(cn,cnat,cp,ce,cms,cr)
        cur=con.cursor()
        ack=cur.execute(qry)
        if ack!=0 :
