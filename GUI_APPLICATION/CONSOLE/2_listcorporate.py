@@ -76,7 +76,10 @@ class lstcorporate(Tk):
                 self.data.grid(row=line,column=c)
                 #temp=r[0]               
             self.but=Button(self,text="EDIT",fg="white",bg="maroon",width=3,command=self.tosend)
+            self.but1=Button(self,text="DEL",fg='white',bg='maroon',width=3)
             self.but.grid(row=line,column=8)
+            self.but1.grid(row=line,column=9)
+
             line+=1
         con.close()  
 

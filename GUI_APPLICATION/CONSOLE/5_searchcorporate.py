@@ -1,5 +1,4 @@
 
-
 from tkinter import *
 from tkinter import messagebox
 from tkinter.font import BOLD
@@ -40,7 +39,6 @@ class editgui(Tk):
         self.lb7=Label(self,text="CORPORATE RATINGS  ",font=fontsty2,fg='grey',bg='cyan').place(x=50,y=380)
 
         self.but=Button(self,text="SEARCH ",font=fontsty2,bg='grey',fg='cyan',width=10,command=self.finding).place(x=150,y=450)
-        self.but=Button(self,text="UPDATE",font=fontsty2,bg='grey',fg='cyan',width=10,command=self.updating).place(x=300,y=450)
         self.but2=Button(self,text="CANCEL",font=fontsty2,fg='cyan',bg='grey',width=10,command=self.reset).place(x=450,y=450) 
          
         self.en=Entry(self,width=20,fg='grey',bg='cyan',font=fontsty3) 
@@ -118,47 +116,14 @@ class editgui(Tk):
         self.en.delete(0,END)
         self.en1.delete(0,END)   
         self.cmb.set("")
-        #self.cb=Checkbutton(self,variable=self.cb1,text="JAVA",foreground='grey',background='cyan',font=fontstyform,offvalue=0).place(x=350,y=180)
-        #self.cb=Checkbutton(self,variable=self.cb2,text="PYTHON",foreground='grey',background='cyan',font=fontstyform,offvalue=0).place(x=440,y=180)
-        #self.cb=Checkbutton(self,variable=self.cb3,text="DOT NET",foreground='grey',background='cyan',font=fontstyform,offvalue=0).place(x=550,y=180)#Image=PhotoImage(file="D:\\PYTHON\\GUI_APPLICATION\\CONSOLE\\dotnetnew.png" ),compound='left' 
+        self.cb=Checkbutton(self,variable=self.cb1,text="JAVA",foreground='grey',background='cyan',font=fontstyform,offvalue=0).place(x=350,y=180)
+        self.cb=Checkbutton(self,variable=self.cb2,text="PYTHON",foreground='grey',background='cyan',font=fontstyform,offvalue=0).place(x=440,y=180)
+        self.cb=Checkbutton(self,variable=self.cb3,text="DOT NET",foreground='grey',background='cyan',font=fontstyform,offvalue=0).place(x=550,y=180)#Image=PhotoImage(file="D:\\PYTHON\\GUI_APPLICATION\\CONSOLE\\dotnetnew.png" ),compound='left' 
         self.en2.delete(0,END)
         self.en3.delete(0,END)
         self.en4.delete(0,END)
         self.en5.delete(0,END)
-    
-    def updating(self):
-       con.autocommit(True) 
-       fontstyform=font=("callibre",10,BOLD)
-       temp=StringVar()
-       temp=str(self.en.get())
-       print(temp)
-       copen=" "
-       cn=str(self.en1.get())
-       cnat=str(self.cmb.get())
-       cp=str(self.en2.get())
-    
-       if str(self.cb1.get()) == "True" :
-          copen+="JAVA,"
-          
-       if str(self.cb2.get()) == "True" :
-           copen+="PYTHON,"
-       if str(self.cb3.get()) == "True" :
-          copen+="DOTNET,"   
-       # copennings=str(copen)
-       
-       ce=int(str(self.en3.get()))
-       cms=float(str(self.en4.get()))
-       cr=float(str(self.en5.get()))
-       print("NEW VALUES",cn,cnat,copen,cp,ce,cms,cr)
-
-       qry=""" Update corp SET org = '%s',nature='%s',opennings='%s',place='%s',employees=%d,BasicSalary=%f,ratings=%f where shortform='%s'""" %(cn,cnat,copen,cp,ce,cms,cr,temp) 
-           
-       ack=cur.execute(qry)
-       if ack!=0 :
-           messagebox.showinfo("INFO","CORPORATE HAS UPDATED")
-       else:
-           messagebox.showinfo("INFO","UPDATED NOT DONE")   
-       con.close()    
+        con.close()    
       
 obj=editgui()
-obj.mainloop()        
+obj.mainloop()    

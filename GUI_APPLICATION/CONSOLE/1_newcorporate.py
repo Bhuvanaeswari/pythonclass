@@ -71,11 +71,11 @@ class consolegui(Tk):
         cnat=str(self.cmb.get())
         tmp=""
         if self.cb1.get()==True:
-            tmp+="JAVA ,"
+            tmp="JAVA,"
         if self.cb2.get() == True:
-            tmp+="PYTHON ,"    
+            tmp+="PYTHON,"    
         if self.cb3.get() == True:
-            tmp+="DOTNET "    
+            tmp+="DOTNET"    
         cp=str(self.en2.get())
         ce=int(str(self.en3.get()))
         cms=float(str(self.en4.get()))
